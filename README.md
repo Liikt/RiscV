@@ -1,6 +1,6 @@
 # RiscV
 
-A RiscV disassembler for all flavors of RiscV.
+A RiscV disassembler for all flavors of RiscV for binaryninja.
 
 ## Supported extensions
 
