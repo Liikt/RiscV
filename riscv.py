@@ -1,5 +1,4 @@
-from binaryninja import (Architecture, BranchType, Endianness, InstructionInfo,
-                         RegisterInfo)
+from binaryninja import Architecture, Endianness, RegisterInfo
 
 from .disas import RiscVDisassembler
 from .lifter import RiscVLifter
@@ -30,13 +29,13 @@ class RiscV32(Architecture):
     stack_pointer = "sp"
 
     def get_instruction_info(self, data, addr):
-        pass
+        self.disassembler.get_insn_info(data, addr)
 
     def get_instruction_text(self, data, addr):
-        pass
+        self.disassembler.get_insn_text(data, addr)
 
     def get_instruction_low_level_il(self, data, addr, il):
-        pass
+        self.lifter.lift_insn(data, addr, il)
 
 class RiscV32F(RiscV32):
     name = "riscv32f"
