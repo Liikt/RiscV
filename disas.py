@@ -3,8 +3,8 @@ class RiscVDisassembler(object):
         self.XLen = XLen
         self.FLen = FLen
 
-    def get_insn_info(self, addr, data):
+    def get_insn_info(self, data, addr):
         pass
 
-    def get_insn_text(self, addr, data):
+    def get_insn_text(self, data, addr):
         pass
