@@ -29,13 +29,13 @@ class RiscV32(Architecture):
     stack_pointer = "sp"
 
     def get_instruction_info(self, data, addr):
-        self.disassembler.get_insn_info(data, addr)
+        return self.disassembler.get_insn_info(data, addr)
 
     def get_instruction_text(self, data, addr):
-        self.disassembler.get_insn_text(data, addr)
+        return self.disassembler.get_insn_text(data, addr)
 
     def get_instruction_low_level_il(self, data, addr, il):
-        self.lifter.lift_insn(data, addr, il)
+        return self.lifter.lift_insn(data, addr, il)
 
 class RiscV32F(RiscV32):
     name = "riscv32f"
