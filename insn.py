@@ -146,7 +146,7 @@ class RTypeInstruction(RiscVInstruction):
         info.length = self.length
         return info
 
-    def get_info(self, _addr):
+    def get_text(self, _addr):
         op  = Token(TokenType.InstructionToken, 
             self.mnemonics[self.funct3][self.funct7].ljust(8))
         space = Token(TokenType.TextToken, " ")
