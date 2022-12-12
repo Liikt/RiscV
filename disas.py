@@ -1,5 +1,3 @@
-from binaryninja.function import InstructionTextToken, InstructionTextTokenType
-
 from .insn import from_bytes
 
 class RiscVDisassembler(object):
@@ -9,9 +7,12 @@ class RiscVDisassembler(object):
 
     def get_insn_info(self, data, addr):
         insn = from_bytes(data, addr)
-        if insn is not None:
-            return insn.get_info(addr)
-        return None
+        if insn is None:
+            return None
+        return insn.get_info(addr)
 
     def get_insn_text(self, data, addr):
-        return [InstructionTextToken(InstructionTextTokenType.TextToken, "HELLO!")], 4
+        insn = from_bytes(data, addr)
+        if insn is None:
+            return None
+        return insn.get_text(addr)
