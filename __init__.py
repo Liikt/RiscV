@@ -8,7 +8,7 @@ variants = [
     (RiscV128, "riscv128"), (RiscV128F, "riscv128f"), (RiscV128D, "riscv128d"), (RiscV128Q, "riscv128q"),
 ]
 
-DEFAULT_VARIANT = "riscv64"
+DEFAULT_VARIANT = "riscv32"
 
 for (Risc, name) in variants:
     Risc.register()
