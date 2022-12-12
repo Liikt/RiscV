@@ -223,15 +223,15 @@ class ITypeInstruction(RiscVInstruction):
         if self.opcode in branch_instructions:
             if self.opcode == 0b1110011 and not self.imm:
                 # ECALL
-                result.append(Token(TokenType.InstructionToken, "ecall"))
+                result.append(Token(TokenType.InstructionToken, "ecall".ljust(8)))
             elif self.opcode == 0b1110011 and self.imm:
                 # EBREAK
-                result.append(Token(TokenType.InstructionToken, "ebreak"))
+                result.append(Token(TokenType.InstructionToken, "ebreak".ljust(8)))
             elif self.opcode == 0b1100111:
                 # JALR
                 if self.rd:
                     tgt = (self.imm + self.rs1) & ((1 << 32) - 2)
-                    result.append(Token(TokenType.InstructionToken, "jalr"))
+                    result.append(Token(TokenType.InstructionToken, "jalr".ljust(8)))
                     result.append(space)
                     result.append(Token(TokenType.RegisterToken, GP_REGS[self.rd]))
                     result.append(sep)
