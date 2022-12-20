@@ -35,7 +35,7 @@ class RiscV32(Architecture):
         return self.disassembler.get_insn_text(data, addr)
 
     def get_instruction_low_level_il(self, data, addr, il):
-        return self.lifter.lift_insn(data, addr, il)
+        return self.lifter.get_insn_low_level_il(data, addr, il)
 
 class RiscV32F(RiscV32):
     name = "riscv32f"
