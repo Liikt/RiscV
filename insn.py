@@ -1,6 +1,6 @@
 from binaryninja.log import log_warn
 from binaryninja.enums import BranchType
-from binaryninja.architecture import InstructionInfo
+from binaryninja.function import InstructionInfo
 from binaryninja.function import InstructionTextToken as Token
 from binaryninja.function import InstructionTextTokenType as TokenType
 
@@ -166,8 +166,8 @@ class ITypeInstruction(RiscVInstruction):
     mnemonics = {
         0b0000011: {
             0b000: "lb",
-            0b001: "lw",
-            0b010: "lh",
+            0b001: "lh",
+            0b010: "lw",
             0b100: "lbu",
             0b101: "lhu",
         },
@@ -260,15 +260,18 @@ class ITypeInstruction(RiscVInstruction):
             mnemonic = self.mnemonics[op][self.funct3]
             if mnemonic == "addi" and self.rs1 == 0:
                 mnemonic = "li"
+            elif mnemonic == "addi" and self.imm == 0:
+                mnemonic = "mv"
             result.append(Token(TokenType.InstructionToken, mnemonic.ljust(8)))
             result.append(space)
             result.append(rd)
             if mnemonic != "li":
                 result.append(sep)
                 result.append(rs1)
-            result.append(sep)
-            val = self.imm if self.shmt is None else self.shmt
-            result.append(Token(TokenType.IntegerToken, hex(val), value=val))
+            if mnemonic != "mv":
+                result.append(sep)
+                val = self.imm if self.shmt is None else self.shmt
+                result.append(Token(TokenType.IntegerToken, hex(val), value=val))
 
         return (result, self.length)
 
